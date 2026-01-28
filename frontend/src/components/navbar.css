@@ -1,0 +1,39 @@
+.custom-navbar {
+  background: linear-gradient(135deg, rgb(214, 164, 71), #a65813);
+  padding: 0.8rem 0;
+  border-radius: 12px;
+  position: fixed;
+  width: 1460px;
+  margin-bottom: 79px;
+  border:7px solid #d8ae3a;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  color: #d1d5db !important;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  transition: color 0.2s ease;
+}
+.navbar-nav{
+margin-left: 290px;
+margin-right: 400px;
+gap: 90px;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff !important;
+}
+
+.btn-outline-light {
+  border-color: #9ca3af;
+}
+
+.btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #111827;
+}

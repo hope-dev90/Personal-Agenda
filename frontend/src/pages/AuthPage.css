@@ -1,0 +1,109 @@
+.auth-container {
+
+  background-color: rgba(255, 255, 255, 0.5); /* white at 50% opacity */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-right: 490px;
+   transform: scale(1.05); 
+}
+
+.aut-container{
+  
+  background-color: rgba(255, 255, 255, 0.5); /* white at 50% opacity */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 600;
+  font-display: fallback;
+
+}
+.aut-container:hover{
+      transform: scale(1.05); 
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 1rem;
+  text-align: left;
+  font-weight: 500;
+}
+.auth-footer{
+    color: rgb(2, 2, 3);
+    margin-top: 23px;
+}
+.signup{
+    color: #4224ae;
+    text-decoration: none;
+}
+.auth-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.-primary {
+  width: 250px;
+  padding: 0.75rem;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-left: 50px;
+  
+}
+.back-home-container {
+  display: flex;
+  justify-content: flex-start; 
+  padding: 1rem; 
+  margin-top: 0px;
+ margin-bottom: 590px;
+ margin-left: 190px;
+ margin-right: 90px;
+}
+
+.back-home-btn {
+  text-decoration: none;
+  color: #d6dae3; /* Modern blue */
+ background-color: rgba(255, 255, 255, 0.5); 
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.back-home-btn:hover {
+  background-color: #fcd34d;
+  color: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+
+
+.btn-primary{
+    background-color: #fef3c7;
+    border-radius: 9px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    padding: 9px;
+}
+.btn-primary:hover{
+    color: rgb(22, 19, 35);
+    background-color: #fbf9f6;
+}

@@ -1,0 +1,189 @@
+.h1{
+    margin-top: 90px;
+    color: rgb(26, 15, 0);
+    font-size: 60px;
+        margin-left: 480px;
+        margin-top: 30px;
+}
+.noteh2{
+    color:orange;
+    font-size: 100px;
+    margin-left: 360px;
+    margin-top: 90px;
+}
+.notesbox{
+    color: black;
+    background-color: rgb(227, 225, 222);
+    border-radius: 90px;
+    width: 390px;
+    padding-left: 39px;
+    height: 40px;
+    padding-top: 12px;
+    padding-bottom: 22px;
+    margin-left: 440px;
+    margin-top: 94px;
+margin-bottom: 30px;}
+.paragraph{
+    color: gray;
+    margin-left: 230px;
+    margin-right: 290px;
+}
+.success {
+  background-color: orange; 
+  border: none;              
+  border-radius: 50px;       
+  padding: 10px 30px;        
+  width: auto;              
+  height: 45px;              
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+  transition: all 0.3s ease; 
+  font-weight: 500;          
+  font-size: 1rem;
+  color: #333;               
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 190px; 
+  margin-left: 470px;       
+}
+
+.success:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); 
+  transform: translateY(-3px);                
+  background-color: #fff9e6;                 
+}
+
+.white {
+  background-color: #fbf8f2; 
+  border: none;              
+  border-radius: 50px;       
+  padding: 10px 30px;        
+  width: auto;              
+  height: 45px;              
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+  transition: all 0.3s ease; 
+  font-weight: 500;          
+  font-size: 1rem;
+  color: #333;               
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto;         
+}
+
+.white:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); 
+  transform: translateY(-3px);                
+  background-color: #fff9e6;                 
+}
+.focus{
+    color: gray;
+}
+/* Grid container */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* Individual card */
+.feature-card {
+  background-color: #fff; /* white card */
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Hover effects */
+.feature-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Icon container */
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem auto;
+  border-radius: 15px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Icon hover */
+.feature-card:hover .feature-icon {
+  background-color:orange; /* Bootstrap primary blue */
+}
+
+.feature-icon .icon {
+  width: 30px;
+  height: 30px;
+  color: orange; /* primary color */
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .icon {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+/* Title */
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Description */
+.feature-desc {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+.get-started-btn {
+  background-color: orange;       /* Bootstrap primary blue */
+  color: #fff;                     /* white text */
+  border: none;
+  border-radius: 50px;             /* pill shape */
+  padding: 12px 30px;              /* comfortable padding */
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.get-started-btn:hover {
+  background-color: orange;       
+  box-shadow: 0 8px 25px rgba(253, 241, 13, 0.5);
+  transform: translateY(-3px);     
+}
+.ready{
+    background-color: rgb(245, 235, 220);
+border-radius: 50px;
+margin-top: 90px;
+margin-bottom: 90px;
+padding-bottom: 30px;
+padding-left: 90px;
+padding-top: 30px;
+
+}
+.readyh1{
+    font-size: 50px;
+}
+.readyp{
+    color: gray;
+}
