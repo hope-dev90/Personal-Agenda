@@ -53,7 +53,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:4300/api/notes", {
+      const res = await fetch("http://localhost:4400/api/notes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      await fetch(`http://localhost:4300/api/notes/${id}`, {
+      await fetch(`http://localhost:4400/api/notes/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -105,7 +105,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      const res = await fetch(`http://localhost:4300/api/notes/${id}`, {
+      const res = await fetch(`http://localhost:4400/api/notes/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
