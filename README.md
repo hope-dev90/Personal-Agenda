@@ -26,7 +26,6 @@ AgendaHub is a full-stack personal agenda application that allows users to secur
 - **Other:** dotenv, bcryptjs, cors, morgan
 
 ---
-
 ## Project Structure
 
 ```
