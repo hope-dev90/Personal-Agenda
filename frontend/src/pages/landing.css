@@ -1,116 +1,122 @@
-.h1{
-    margin-top: 90px;
-    color: rgb(26, 15, 0);
-    font-size: 60px;
-        margin-left: 480px;
-        margin-top: 30px;
+/* Global container */
+.text-bg-light {
+  padding: 1rem;
+  box-sizing: border-box;
 }
-.noteh2{
-    color:orange;
-    font-size: 100px;
-    margin-left: 360px;
-    margin-top: 90px;
-}
-.notesbox{
-    color: black;
-    background-color: rgb(227, 225, 222);
-    border-radius: 90px;
-    width: 390px;
-    padding-left: 39px;
-    height: 40px;
-    padding-top: 12px;
-    padding-bottom: 22px;
-    margin-left: 440px;
-    margin-top: 94px;
-margin-bottom: 30px;}
-.paragraph{
-    color: gray;
-    margin-left: 230px;
-    margin-right: 290px;
-}
-.success {
-  background-color: orange; 
-  border: none;              
-  border-radius: 50px;       
-  padding: 10px 30px;        
-  width: auto;              
-  height: 45px;              
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
-  transition: all 0.3s ease; 
-  font-weight: 500;          
+
+/* Notes Box */
+.notesbox {
+  color: black;
+  background-color: rgb(227, 225, 222);
+  border-radius: 90px;
+  width: 90%;
+  max-width: 400px;
+  padding: 12px 20px 22px 20px;
+  margin: 2rem auto 1.5rem auto; /* centered and spaced */
+  text-align: center;
+  margin-top: 90px;
   font-size: 1rem;
-  color: #333;               
-  cursor: pointer;
-  display: inline-flex;
+}
+
+/* Big headings */
+.h1 {
+  color: rgb(26, 15, 0);
+  font-size: clamp(2rem, 6vw, 3.5rem); /* scales with screen */
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.noteh2 {
+  color: orange;
+  font-size: clamp(2.5rem, 8vw, 5rem); /* scales for small → large screens */
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* Paragraph */
+.paragraph {
+  color: gray;
+  text-align: center;
+  max-width: 700px;
+  margin: 1rem auto;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+/* Button group */
+.button-group {
+  display: flex;
+  flex-direction: column; /* stack on mobile */
+  gap: 1rem;
   align-items: center;
   justify-content: center;
-  margin-right: 190px; 
-  margin-left: 470px;       
+  margin: 2rem 0;
+}
+
+.button-group button {
+  padding: 10px 30px;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Buttons styling */
+.success {
+  background-color: orange;
+  color: #333;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: auto;
 }
 
 .success:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); 
-  transform: translateY(-3px);                
-  background-color: #fff9e6;                 
+  background-color: #fff9e6;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-3px);
 }
 
 .white {
-  background-color: #fbf8f2; 
-  border: none;              
-  border-radius: 50px;       
-  padding: 10px 30px;        
-  width: auto;              
-  height: 45px;              
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
-  transition: all 0.3s ease; 
-  font-weight: 500;          
-  font-size: 1rem;
-  color: #333;               
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 40px auto;         
+  background-color: #fbf8f2;
+  color: #333;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .white:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); 
-  transform: translateY(-3px);                
-  background-color: #fff9e6;                 
+  background-color: #fff9e6;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-3px);
 }
-.focus{
-    color: gray;
-}
-/* Grid container */
+
+/* Features grid */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
   margin-top: 3rem;
+  padding: 0 1rem;
 }
 
-/* Individual card */
+/* Feature card */
 .feature-card {
-  background-color: #fff; /* white card */
+  background-color: #fff;
   border-radius: 20px;
   padding: 2rem 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  cursor: pointer;
   text-align: center;
+  transition: all 0.3s ease;
 }
 
-/* Hover effects */
 .feature-card:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Icon container */
+/* Icon */
 .feature-icon {
   width: 60px;
   height: 60px;
-  margin: 0 auto 1rem auto;
+  margin: 0 auto 1rem;
   border-radius: 15px;
   background-color: #f0f0f0;
   display: flex;
@@ -119,15 +125,14 @@ margin-bottom: 30px;}
   transition: all 0.3s ease;
 }
 
-/* Icon hover */
 .feature-card:hover .feature-icon {
-  background-color:orange; /* Bootstrap primary blue */
+  background-color: orange;
 }
 
 .feature-icon .icon {
   width: 30px;
   height: 30px;
-  color: orange; /* primary color */
+  color: orange;
   transition: all 0.3s ease;
 }
 
@@ -136,54 +141,52 @@ margin-bottom: 30px;}
   transform: scale(1.2);
 }
 
-/* Title */
+/* Feature text */
 .feature-title {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-/* Description */
 .feature-desc {
   font-size: 1rem;
   color: #555;
   line-height: 1.5;
 }
+
+/* Ready section */
+.ready {
+  background-color: rgb(245, 235, 220);
+  border-radius: 50px;
+  margin: 4rem 1rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.readyh1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.readyp {
+  color: gray;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
 .get-started-btn {
-  background-color: orange;       /* Bootstrap primary blue */
-  color: #fff;                     /* white text */
+  background-color: orange;
+  color: #fff;
   border: none;
-  border-radius: 50px;             /* pill shape */
-  padding: 12px 30px;              /* comfortable padding */
+  border-radius: 50px;
+  padding: 12px 30px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
+  margin-top: 1.5rem;
   transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
 }
 
 .get-started-btn:hover {
-  background-color: orange;       
+  transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(253, 241, 13, 0.5);
-  transform: translateY(-3px);     
-}
-.ready{
-    background-color: rgb(245, 235, 220);
-border-radius: 50px;
-margin-top: 90px;
-margin-bottom: 90px;
-padding-bottom: 30px;
-padding-left: 90px;
-padding-top: 30px;
-
-}
-.readyh1{
-    font-size: 50px;
-}
-.readyp{
-    color: gray;
 }

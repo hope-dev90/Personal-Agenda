@@ -1,39 +1,83 @@
 .custom-navbar {
   background: linear-gradient(135deg, rgb(214, 164, 71), #a65813);
-  padding: 0.8rem 0;
+  padding: 0.8rem 1rem;
   border-radius: 12px;
   position: fixed;
-  width: 1460px;
-  margin-bottom: 79px;
-  border:7px solid #d8ae3a;
+  top: 0;
+  width: 100%; /* full width on all screens */
+  z-index: 1000;
+  border: 5px solid #d8ae3a;
+  box-sizing: border-box;
+
 }
 
+/* Brand */
 .navbar-brand {
   font-size: 1.4rem;
   letter-spacing: 0.5px;
 }
 
+/* Nav links container */
+.navbar-nav {
+  display: flex;
+  flex-wrap: wrap; /* wrap on smaller screens */
+  justify-content: center; /* center on mobile */
+  gap: 1rem; /* spacing between links */
+  margin: 0 auto; /* center container */
+}
+
+/* Nav links */
 .nav-link {
   color: #d1d5db !important;
   font-weight: 500;
-  margin-right: 0.5rem;
   transition: color 0.2s ease;
+  padding: 0.5rem 0.8rem;
 }
-.navbar-nav{
-margin-left: 290px;
-margin-right: 400px;
-gap: 90px;
-}
+
 .nav-link:hover,
 .nav-link.active {
   color: #ffffff !important;
 }
 
+/* Outline buttons */
 .btn-outline-light {
   border-color: #9ca3af;
+  transition: all 0.3s ease;
 }
 
 .btn-outline-light:hover {
   background-color: #ffffff;
   color: #111827;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar-nav {
+    gap: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+  }
+}
+
+/* Optional: smaller brand on mobile */
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
 }
