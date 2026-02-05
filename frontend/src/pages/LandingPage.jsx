@@ -1,4 +1,5 @@
 
+
 import Footer from "../components/Footer";
 import "./landing.css";
 import { useNavigate } from "react-router-dom";
