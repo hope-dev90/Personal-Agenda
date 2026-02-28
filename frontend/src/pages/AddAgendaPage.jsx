@@ -13,7 +13,7 @@ const AddAgenda = () => {
   const [newContent, setNewContent] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
-  // Fetch notes from backend
+  
   useEffect(() => {
     const fetchNotes = async () => {
       if (!token) return;
@@ -31,11 +31,11 @@ const AddAgenda = () => {
     fetchNotes();
   }, [token]);
 
-  // Add note
+  
   const addNote = async () => {
     if (!newTitle.trim()) return;
 
-    // Temporary note for optimistic UI
+    
     const tempId = crypto.randomUUID();
     const tempNote = {
       _id: tempId,

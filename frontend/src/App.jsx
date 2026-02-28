@@ -1,5 +1,5 @@
 // App.jsx
-import { Routes, Route } from "react-router-dom"; // <-- only import Routes & Route
+import { Routes, Route } from "react-router-dom"; 
 
 import LandingPage from "./pages/LandingPage";
 import AddAgendaPage from "./pages/AddAgendaPage";
