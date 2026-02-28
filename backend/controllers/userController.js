@@ -52,7 +52,7 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log("Login attempt:", email); // debug
+    console.log("Login attempt:", email); 
 
     if (!email || !password) {
       return res.status(400).json({ message: "All fields are required" });
@@ -82,7 +82,7 @@ export const loginUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("Login error:", error); // full stack trace
+    console.error("Login error:", error); 
     res.status(500).json({ message: "Server error" });
   }
 };
