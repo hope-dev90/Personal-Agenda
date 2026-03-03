@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import signupBg from "../assets/login-bg.png"; // background image
-import "./AuthPage.css"; // reuse same CSS
+import signupBg from "../assets/login-bg.png";
+import "./AuthPage.css";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setMessage("");
+    setError("");
 
     try {
       const res = await fetch("http://localhost:4400/api/users/signup", {
@@ -22,17 +27,24 @@ const SignupPage = () => {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Signup successful! You can now login.");
+        setMessage(
+          "Signup successful! Please check your email to verify your account."
+        );
+
         setName("");
         setEmail("");
         setPassword("");
-        navigate("/login");
+
+        // Wait 2 seconds then redirect
+        setTimeout(() => {
+          navigate("/verify-email");
+        }, 2000);
       } else {
-        alert(data.message || "Signup failed");
+        setError(data.message || "Signup failed");
       }
     } catch (err) {
       console.error("Signup error:", err);
-      alert("Something went wrong. Check backend is running.");
+      setError("Something went wrong. Make sure backend is running.");
     }
   };
 
@@ -40,7 +52,7 @@ const SignupPage = () => {
     <div
       className="auth-page"
       style={{
-        backgroundImage: `url(${signupBg})`,
+        background:"linear-gradient(to right, #fae19c, #a06f25)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
@@ -50,7 +62,8 @@ const SignupPage = () => {
       }}
     >
       <div className="auth-container">
-        <h1>Sign Up</h1>
+        <h1>Create Account</h1>
+
         <form onSubmit={handleSignup} className="auth-form">
           <label>
             Full Name
@@ -82,6 +95,7 @@ const SignupPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               required
+              minLength="6"
             />
           </label>
 
@@ -89,8 +103,14 @@ const SignupPage = () => {
             Sign Up
           </button>
 
+          {message && <p className="success-message">{message}</p>}
+          {error && <p className="error-message">{error}</p>}
+
           <p className="auth-footer">
-            Already have an account? <Link to="/login" className="signup">Login here</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="signup">
+              Login here
+            </Link>
           </p>
         </form>
       </div>

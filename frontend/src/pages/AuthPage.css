@@ -8,7 +8,7 @@
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  margin-right: 490px;
+  margin-right: 190px;
    transform: scale(1.05); 
 }
 
@@ -106,4 +106,379 @@
 .btn-primary:hover{
     color: rgb(22, 19, 35);
     background-color: #fbf9f6;
+}
+/* ResetPasswordPage.css */
+
+/* Full page container */
+.reset-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #f5f0ff, #ffe6f0);
+  font-family: "Helvetica", Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Reset card/container */
+.reset-container {
+  background-color: #fff;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.reset-container h1 {
+  color: #46022f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form styling */
+.reset-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.reset-form label {
+  font-size: 14px;
+  color: #46022f;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reset-form input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: border-color 0.3s;
+}
+
+.reset-form input:focus {
+  border-color: #46022f;
+  outline: none;
+}
+
+/* Submit button */
+.reset-form button {
+  margin-top: 25px;
+  padding: 12px 0;
+  background-color: #46022f;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reset-form button:hover {
+  background-color: #5a0f54;
+}
+
+/* Footer link */
+.reset-footer {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #46022f;
+}
+
+.reset-footer a {
+  color: #46022f;
+  text-decoration: underline;
+}
+
+.reset-footer a:hover {
+  color: #5a0f54;
+}
+
+/* Back home button */
+.back-home-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.back-home-btn {
+  background-color: transparent;
+  border: none;
+  color: #46022f;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.back-home-btn:hover {
+  color: #5a0f54;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .reset-container {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .reset-form button {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .reset-footer {
+    font-size: 13px;
+  }
+}
+/* ForgotPasswordPage.css */
+
+/* Full page container */
+.forgot-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #f5f0ff, #ffe6f0);
+  font-family: "Helvetica", Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Card/container */
+.forgot-container {
+  background-color: #fff;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.forgot-container h1 {
+  color: #46022f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form styling */
+.forgot-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.forgot-form input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: border-color 0.3s;
+}
+
+.forgot-form input:focus {
+  border-color: #46022f;
+  outline: none;
+}
+
+/* Submit button */
+.forgot-form button {
+  margin-top: 25px;
+  padding: 12px 0;
+  background-color: #46022f;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.forgot-form button:hover {
+  background-color: #5a0f54;
+}
+
+/* Footer link */
+.forgot-footer {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #46022f;
+}
+
+.forgot-footer a {
+  color: #46022f;
+  text-decoration: underline;
+}
+
+.forgot-footer a:hover {
+  color: #5a0f54;
+}
+
+/* Back home button */
+.back-home-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.back-home-btn {
+  background-color: transparent;
+  border: none;
+  color: #46022f;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.back-home-btn:hover {
+  color: #5a0f54;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .forgot-container {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .forgot-form button {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .forgot-footer {
+    font-size: 13px;
+  }
+}
+/* EmailVerificationPage.css */
+
+.verification-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #f5f0ff, #ffe6f0);
+  font-family: "Helvetica", Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.verification-container {
+  background-color: #fff;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.verification-container h2 {
+  color: #46022f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.verification-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.verification-form input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: border-color 0.3s;
+}
+
+.verification-form input:focus {
+  border-color: #46022f;
+  outline: none;
+}
+
+.verification-form button {
+  margin-top: 20px;
+  padding: 12px 0;
+  background-color: #46022f;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.verification-form button:hover {
+  background-color: #5a0f54;
+}
+
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.message.success {
+  color: green;
+}
+
+.message.error {
+  color: red;
+}
+
+.footer-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.footer-link a {
+  color: #46022f;
+  text-decoration: underline;
+}
+
+.footer-link a:hover {
+  color: #5a0f54;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .verification-container {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .verification-form button {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .footer-link {
+    font-size: 13px;
+  }
 }

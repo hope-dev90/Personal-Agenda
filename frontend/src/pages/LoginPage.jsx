@@ -1,53 +1,53 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import loginBg from "../assets/login-bg.png"; // correct relative path
-import "./AuthPage.css"; 
+import loginBg from "../assets/login-bg.png";
+import "./AuthPage.css";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-const handleSubmit = async (e) => {
-  e.preventDefault();
-const token = localStorage.getItem("token");
-  try {
-    const response = await fetch("http://localhost:4400/api/users/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-          Authorization: `Bearer ${token}`,
-      body: JSON.stringify({ email, password }),
-    });
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const data = await response.json();
+    try {
+      const response = await fetch("http://localhost:4400/api/users/login", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (response.ok) {
-      localStorage.removeItem("token"); 
-      localStorage.setItem("token", data.token); // store token
-      alert("Login successful!");
-      setEmail("");
-      setPassword("");
-      navigate("/addagenda");
-    } else {
-      alert(data.message || "Login failed");
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        alert("Login successful!");
+        setEmail("");
+        setPassword("");
+        navigate("/addagenda");
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("Something went wrong. Check backend is running.");
     }
-  } catch (err) {
-    console.error("Login error:", err);
-    alert("Something went wrong. Check backend is running.");
-  }
-};
-
+  };
 
   return (
     <div
       className="auth-page"
       style={{
-        backgroundImage: `url(${loginBg})`,
+        background:"linear-gradient(to right, #a97b53, #cf9310)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
+       
         alignItems: "center",
       }}
     >
@@ -59,6 +59,7 @@ const token = localStorage.getItem("token");
 
       <div className="auth-container">
         <h1>Login</h1>
+
         <form onSubmit={handleSubmit} className="auth-form">
           <label>
             Email
@@ -86,8 +87,18 @@ const token = localStorage.getItem("token");
             Login
           </button>
 
+          {/* 👇 Forgot Password Link */}
           <p className="auth-footer">
-            Don't have an account? <Link to="/signup" className="signup">Sign up here</Link>
+            <Link to="/forgot-password" className="forgot-link">
+              Forgot Password?
+            </Link>
+          </p>
+
+          <p className="auth-footer">
+            Don't have an account?{" "}
+            <Link to="/signup" className="signup">
+              Sign up here
+            </Link>
           </p>
         </form>
       </div>
