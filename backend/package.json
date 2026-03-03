@@ -5,6 +5,7 @@
   "homepage": "https://hope-dev90.github.io/Personal-Agenda",
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "config": "^4.4.1",
     "dotenv": "^17.3.1",
     "jsonwebtoken": "^9.0.3",
     "nodemailer": "^8.0.1",
