@@ -12,41 +12,35 @@ const SignupPage = () => {
 
   const navigate = useNavigate();
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    setMessage("");
-    setError("");
+ const handleSignup = async (e) => {
+  e.preventDefault();
+  setMessage("");
+  setError("");
 
-    try {
-      const res = await fetch("http://localhost:4400/api/users/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
+  try {
+    const res = await fetch("http://localhost:4400/api/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (res.ok) {
-        setMessage(
-          "Signup successful! Please check your email to verify your account."
-        );
-
-        setName("");
-        setEmail("");
-        setPassword("");
-
-        // Wait 2 seconds then redirect
-        setTimeout(() => {
-          navigate("/verify-email");
-        }, 2000);
-      } else {
-        setError(data.message || "Signup failed");
-      }
-    } catch (err) {
-      console.error("Signup error:", err);
-      setError("Something went wrong. Make sure backend is running.");
+    if (res.ok) {
+      setMessage("Signup successful! Redirecting...");
+      setName(""); setEmail(""); setPassword("");
     }
-  };
+
+  
+    setTimeout(() => navigate("/verify-email"), 2000);
+
+  } catch (err) {
+    console.error("Signup error:", err);
+    setError("Something went wrong. Make sure backend is running.");
+  
+    setTimeout(() => navigate("/verify-email"), 2000);
+  }
+};
 
   return (
     <div

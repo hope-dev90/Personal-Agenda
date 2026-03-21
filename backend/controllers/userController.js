@@ -5,12 +5,9 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
-// Generate 6-digit code
 function generateCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
-
-// Send email
 async function sendVerificationEmail(toEmail, code) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -32,19 +29,17 @@ async function sendVerificationEmail(toEmail, code) {
   `;
 
   await transporter.sendMail({
-    from: `Agenda <${process.env.EMAIL_USER}>`,
+    from: `"Personal Agenda" <${process.env.EMAIL_USER}>`,
     to: toEmail,
     subject: "Your Verification Code",
     html: htmlContent,
   });
 }
-
-// JWT token generator
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-// REGISTER USER
+// REGISTER
 export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -68,19 +63,25 @@ export const registerUser = async (req, res) => {
       verificationCodeExpires,
     });
 
-    await sendVerificationEmail(email, verificationCode);
+    try {
+      await sendVerificationEmail(email, verificationCode);
+      console.log("✅ Verification email sent to:", email);
+    } catch (emailErr) {
+      console.error("❌ Email failed:", emailErr.message);
+    }
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Signup successful! Check your email for verification code.",
     });
+
   } catch (err) {
-    console.error("Register error:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("Register error:", err.message);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
-// VERIFY EMAIL
+
 export const verifyEmail = async (req, res) => {
   try {
     const { email, code } = req.body;
@@ -103,19 +104,19 @@ export const verifyEmail = async (req, res) => {
 
     const token = generateToken(user._id);
 
-    res.json({
+    return res.json({
       success: true,
       message: "Email verified successfully",
       token,
       user: { id: user._id, name: user.name, email: user.email },
     });
   } catch (err) {
-    console.error("Verify email error:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("Verify email error:", err.message);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
-// LOGIN
+
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -128,13 +129,14 @@ export const loginUser = async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(401).json({ message: "Invalid email or password" });
 
-    if (!user.isVerified) return res.status(401).json({ message: "Please verify your email first" });
+    if (!user.isVerified)
+      return res.status(401).json({ message: "Please verify your email first" });
 
     const token = generateToken(user._id);
-    res.json({ _id: user._id, name: user.name, email: user.email, token });
+    return res.json({ _id: user._id, name: user.name, email: user.email, token });
   } catch (err) {
-    console.error("Login error:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("Login error:", err.message);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -150,12 +152,17 @@ export const forgotPassword = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
     await user.save();
 
-    await sendVerificationEmail(email, code);
+    try {
+      await sendVerificationEmail(email, code);
+      console.log("✅ Reset code sent to:", email);
+    } catch (emailErr) {
+      console.error("❌ Reset email failed:", emailErr.message);
+    }
 
-    res.json({ success: true, message: "Password reset code sent to email." });
+    return res.json({ success: true, message: "Password reset code sent to email." });
   } catch (err) {
-    console.error("Forgot password error:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("Forgot password error:", err.message);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -166,17 +173,19 @@ export const resetPassword = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: "User not found" });
 
-    if (user.resetPasswordCode !== code) return res.status(400).json({ message: "Invalid reset code" });
-    if (Date.now() > user.resetPasswordExpires) return res.status(400).json({ message: "Reset code expired" });
+    if (user.resetPasswordCode !== code)
+      return res.status(400).json({ message: "Invalid reset code" });
+    if (Date.now() > user.resetPasswordExpires)
+      return res.status(400).json({ message: "Reset code expired" });
 
     user.password = await bcrypt.hash(newPassword, 10);
     user.resetPasswordCode = null;
     user.resetPasswordExpires = null;
     await user.save();
 
-    res.json({ success: true, message: "Password reset successfully" });
+    return res.json({ success: true, message: "Password reset successfully" });
   } catch (err) {
-    console.error("Reset password error:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("Reset password error:", err.message);
+    return res.status(500).json({ message: "Server error" });
   }
 };

@@ -374,3 +374,93 @@ padding-top: 30px;
   margin-left: 290px;
   border-radius: 15px;
 }
+/* Container for customization controls */
+.note-customization {
+ display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 600px; /* <-- pushes it to the bottom */
+  padding: 10px;
+ width: 40px;
+  border-radius: 8px;
+  border-top: 100px ;
+  margin-bottom: 19px;
+
+}
+
+/* Common style for each label */
+.note-customization label {
+  display: flex;
+  align-items: center;
+ 
+  font-size: 12px;
+  font-weight: 500;
+  width: 90px;
+  color: #333;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect on label */
+.note-customization label:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+}
+
+/* Color input */
+.note-customization input[type="color"] {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.note-customization input[type="color"]:hover {
+  transform: scale(1.1);
+}
+
+/* Font family select */
+.note-customization select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.note-customization select:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+}
+
+/* Image upload input */
+.note-customization input[type="file"] {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Pen color preview circle */
+.note-customization span {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Make the whole customization section responsive */
+@media (max-width: 600px) {
+  .note-customization {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
