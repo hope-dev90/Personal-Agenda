@@ -7,7 +7,7 @@ const ResetPasswordPage = () => {
   const navigate = useNavigate();
 
   const emailFromState = location.state?.email;
-  const [email, setEmail] = useState(emailFromState || "");
+  const [email] = useState(emailFromState || "");
   const [code, setCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
