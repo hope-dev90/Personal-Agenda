@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import signupBg from "../assets/login-bg.png";
 import "./AuthPage.css";
 
 const SignupPage = () => {
@@ -11,6 +10,12 @@ const SignupPage = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  const clearForm = () => {
+    setName("");
+    setEmail("");
+    setPassword("");
+  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -31,9 +36,7 @@ const SignupPage = () => {
           "Signup successful! Please check your email to verify your account."
         );
 
-        setName("");
-        setEmail("");
-        setPassword("");
+        clearForm();
 
         // Wait 2 seconds then redirect
         setTimeout(() => {

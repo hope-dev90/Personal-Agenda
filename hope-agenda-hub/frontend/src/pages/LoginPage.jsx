@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import loginBg from "../assets/login-bg.png";
 import "./AuthPage.css";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const clearForm = () => {
+    setEmail("");
+    setPassword("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,8 +29,7 @@ const LoginPage = () => {
       if (response.ok) {
         localStorage.setItem("token", data.token);
         alert("Login successful!");
-        setEmail("");
-        setPassword("");
+        clearForm();
         navigate("/addagenda");
       } else {
         alert(data.message || "Login failed");

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import signupBg from "../assets/login-bg.png";
 import "./AuthPage.css";
 
 const SignupPage = () => {
@@ -12,35 +11,43 @@ const SignupPage = () => {
 
   const navigate = useNavigate();
 
- const handleSignup = async (e) => {
-  e.preventDefault();
-  setMessage("");
-  setError("");
+  const clearForm = () => {
+    setName("");
+    setEmail("");
+    setPassword("");
+  };
 
-  try {
-    const res = await fetch("http://localhost:4400/api/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
-    });
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setMessage("");
+    setError("");
 
-    const data = await res.json();
+    try {
+      const trimmedEmail = email.trim().toLowerCase();
+      const res = await fetch("http://localhost:4400/api/users/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email: trimmedEmail, password }),
+      });
 
-    if (res.ok) {
-      setMessage("Signup successful! Redirecting...");
-      setName(""); setEmail(""); setPassword("");
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Signup failed.");
+        return;
+      }
+
+      setMessage("Signup successful! Check your email for the code.");
+      clearForm();
+
+      setTimeout(() => {
+        navigate("/verify-email", { state: { email: trimmedEmail } });
+      }, 1500);
+    } catch (err) {
+      console.error("Signup error:", err);
+      setError("Something went wrong. Make sure backend is running.");
     }
-
-  
-    setTimeout(() => navigate("/verify-email"), 2000);
-
-  } catch (err) {
-    console.error("Signup error:", err);
-    setError("Something went wrong. Make sure backend is running.");
-  
-    setTimeout(() => navigate("/verify-email"), 2000);
-  }
-};
+  };
 
   return (
     <div

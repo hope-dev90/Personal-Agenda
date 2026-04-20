@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Check, Calendar } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Plus, Trash2, Check, Calendar, X, Pencil } from "lucide-react";
 import Footer from "../components/Footer";
 import "./AddAgendaPage.css";
 import Navbar from "../components/Navbar";
@@ -12,6 +11,10 @@ const AddAgenda = () => {
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
   const [isAdding, setIsAdding] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editContent, setEditContent] = useState("");
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
 
   
   useEffect(() => {
@@ -79,25 +82,30 @@ const AddAgenda = () => {
     }
   };
 
-  // Delete note
   const deleteNote = async (id) => {
-    setNotes(notes.filter((note) => note._id !== id));
+    const previousNotes = notes;
+    setNotes((prev) => prev.filter((note) => note._id !== id));
+    if (selectedNote?._id === id) {
+      closeNoteViewer();
+    }
     if (!token) return;
 
     try {
-      await fetch(`http://localhost:4400/api/notes/${id}`, {
+      const res = await fetch(`http://localhost:4400/api/notes/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
+      if (!res.ok) throw new Error("Failed to delete note");
     } catch (err) {
       console.error(err);
+      setNotes(previousNotes);
     }
   };
 
-  // Toggle complete
   const toggleComplete = async (id, completed) => {
-    setNotes(
-      notes.map((note) =>
+    const previousNotes = notes;
+    setNotes((prev) =>
+      prev.map((note) =>
         note._id === id ? { ...note, completed: !completed } : note
       )
     );
@@ -118,8 +126,65 @@ const AddAgenda = () => {
       setNotes((prev) =>
         prev.map((note) => (note._id === id ? updatedNote : note))
       );
+      if (selectedNote?._id === id) {
+        setSelectedNote(updatedNote);
+        setEditTitle(updatedNote.title || "");
+        setEditContent(updatedNote.content || "");
+      }
     } catch (err) {
       console.error(err);
+      setNotes(previousNotes);
+    }
+  };
+
+  const openNoteViewer = (note) => {
+    setSelectedNote(note);
+    setEditTitle(note.title || "");
+    setEditContent(note.content || "");
+  };
+
+  const closeNoteViewer = () => {
+    setSelectedNote(null);
+    setEditTitle("");
+    setEditContent("");
+    setIsSavingEdit(false);
+  };
+
+  const saveNoteChanges = async () => {
+    if (!selectedNote || !editTitle.trim() || !token) return;
+
+    setIsSavingEdit(true);
+
+    try {
+      const res = await fetch(
+        `http://localhost:4400/api/notes/${selectedNote._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: editTitle.trim(),
+            content: editContent.trim(),
+          }),
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to save note changes");
+
+      const updatedNote = await res.json();
+
+      setNotes((prev) =>
+        prev.map((note) => (note._id === updatedNote._id ? updatedNote : note))
+      );
+      setSelectedNote(updatedNote);
+      setEditTitle(updatedNote.title || "");
+      setEditContent(updatedNote.content || "");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSavingEdit(false);
     }
   };
 
@@ -133,6 +198,12 @@ const AddAgenda = () => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && e.ctrlKey && newTitle.trim()) addNote();
+  };
+
+  const handleEditKeyDown = (e) => {
+    if (e.key === "Enter" && e.ctrlKey && editTitle.trim()) {
+      saveNoteChanges();
+    }
   };
 
   return (
@@ -164,6 +235,7 @@ const AddAgenda = () => {
         placeholder="Title"
         value={newTitle}
         onChange={(e) => setNewTitle(e.target.value)}
+        onKeyDown={handleKeyDown}
         autoFocus
       />
 
@@ -172,6 +244,7 @@ const AddAgenda = () => {
         placeholder="Write your note..."
         value={newContent}
         onChange={(e) => setNewContent(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
 
       <div className="paper-actions">
@@ -214,18 +287,34 @@ const AddAgenda = () => {
          <div className="notes-grid">
   {notes.map((note) => (
     <div className="tin-note" key={note._id}>
-      <div className="tin-content">
+      <button
+        type="button"
+        className="tin-open"
+        onClick={() => openNoteViewer(note)}
+      >
+        <div className="tin-content">
         <h3>{note.title}</h3>
         <p>{note.content}</p>
+        <span className="tin-read-more">Open and read more</span>
+        </div>
+      </button>
         <div className="tin-actions">
           <button
-            onClick={() => toggleComplete(note._id, note.completed)}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleComplete(note._id, note.completed);
+            }}
             className="tin-check"
           >
             {note.completed && <Check className="icon-small" />}
           </button>
           <button
-            onClick={() => deleteNote(note._id)}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteNote(note._id);
+            }}
             className="tin-delete"
           >
             <Trash2 className="icon-small" />
@@ -238,6 +327,61 @@ const AddAgenda = () => {
 
         )}
       </main>
+
+      {selectedNote && (
+        <div className="paper-overlay" onClick={closeNoteViewer}>
+          <div
+            className="paper-note paper-note-viewer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="viewer-close"
+              onClick={closeNoteViewer}
+              aria-label="Close note"
+            >
+              <X className="icon" />
+            </button>
+
+            <div className="viewer-badge">
+              <Pencil className="icon-small" />
+              Edit note
+            </div>
+
+            <input
+              className="paper-title"
+              type="text"
+              value={editTitle}
+              onChange={(e) => setEditTitle(e.target.value)}
+              onKeyDown={handleEditKeyDown}
+            />
+
+            <textarea
+              className="paper-content"
+              value={editContent}
+              onChange={(e) => setEditContent(e.target.value)}
+              onKeyDown={handleEditKeyDown}
+            />
+
+            <div className="paper-meta">
+              Last updated {formatDate(selectedNote.updatedAt || selectedNote.createdAt)}
+            </div>
+
+            <div className="paper-actions">
+              <button className="btn-secondary" onClick={closeNoteViewer}>
+                Close
+              </button>
+              <button
+                className="notebtn"
+                onClick={saveNoteChanges}
+                disabled={!editTitle.trim() || isSavingEdit}
+              >
+                {isSavingEdit ? "Saving..." : "Save Changes"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
 
       <Footer />

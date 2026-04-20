@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import "./AuthPage.css";
 
 const EmailVerificationPage = () => {
-  const [email, setEmail] = useState("");
+  const location = useLocation();
+  const [email, setEmail] = useState(location.state?.email || "");
   const [code, setCode] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -16,10 +17,11 @@ const EmailVerificationPage = () => {
     setError("");
 
     try {
+      const trimmedEmail = email.trim().toLowerCase();
       const res = await fetch("http://localhost:4400/api/users/verify-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code }),
+        body: JSON.stringify({ email: trimmedEmail, code }),
       });
 
       const data = await res.json();

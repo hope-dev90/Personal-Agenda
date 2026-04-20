@@ -10,6 +10,10 @@ const noteSchema = new mongoose.Schema(
     },
     title: String,
     content: String,
+    completed: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

@@ -315,6 +315,14 @@ padding-top: 30px;
   transform: translateY(-5px);
 }
 
+.tin-open {
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
 /* Content inside the tin */
 .tin-content h3 {
   margin: 0;
@@ -328,6 +336,13 @@ padding-top: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 60px;
+}
+
+.tin-read-more {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #4b5563;
 }
 
 /* Buttons inside the tin */
@@ -369,6 +384,46 @@ padding-top: 30px;
   right: 20px;
   display: flex;
   gap: 10px;
+}
+
+.paper-note-viewer {
+  overflow: hidden;
+}
+
+.viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.viewer-badge {
+  position: absolute;
+  top: 86px;
+  left: 60px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.paper-meta {
+  position: absolute;
+  left: 60px;
+  bottom: 28px;
+  font-size: 13px;
+  color: #4b5563;
 }
 .bigi{
   margin-left: 290px;
