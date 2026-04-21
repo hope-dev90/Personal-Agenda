@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthPage.css";
+import { apiUrl } from "../config/api";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -24,7 +25,7 @@ const SignupPage = () => {
 
     try {
       const trimmedEmail = email.trim().toLowerCase();
-      const res = await fetch("http://localhost:4400/api/users/signup", {
+      const res = await fetch(apiUrl("/api/users/signup"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email: trimmedEmail, password }),
@@ -45,7 +46,7 @@ const SignupPage = () => {
       }, 1500);
     } catch (err) {
       console.error("Signup error:", err);
-      setError("Something went wrong. Make sure backend is running.");
+      setError("Something went wrong while contacting the server.");
     }
   };
 

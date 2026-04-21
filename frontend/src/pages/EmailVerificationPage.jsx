@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import "./AuthPage.css";
+import { apiUrl } from "../config/api";
 
 const EmailVerificationPage = () => {
   const location = useLocation();
@@ -18,7 +19,7 @@ const EmailVerificationPage = () => {
 
     try {
       const trimmedEmail = email.trim().toLowerCase();
-      const res = await fetch("http://localhost:4400/api/users/verify-email", {
+      const res = await fetch(apiUrl("/api/users/verify-email"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: trimmedEmail, code }),
@@ -36,7 +37,7 @@ const EmailVerificationPage = () => {
       }
     } catch (err) {
       console.error("Verification error:", err);
-      setError("Something went wrong. Make sure backend is running.");
+      setError("Something went wrong while contacting the server.");
     }
   };
 

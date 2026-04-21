@@ -3,6 +3,7 @@ import { Plus, Trash2, Check, Calendar, X, Pencil } from "lucide-react";
 import Footer from "../components/Footer";
 import "./AddAgendaPage.css";
 import Navbar from "../components/Navbar";
+import { apiUrl } from "../config/api";
 
 const AddAgenda = () => {
   const token = localStorage.getItem("token");
@@ -21,7 +22,7 @@ const AddAgenda = () => {
     const fetchNotes = async () => {
       if (!token) return;
       try {
-        const res = await fetch("http://localhost:4400/api/notes", {
+        const res = await fetch(apiUrl("/api/notes"), {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch notes");
@@ -56,7 +57,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:4400/api/notes", {
+      const res = await fetch(apiUrl("/api/notes"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +92,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      const res = await fetch(`http://localhost:4400/api/notes/${id}`, {
+      const res = await fetch(apiUrl(`/api/notes/${id}`), {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -113,7 +114,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      const res = await fetch(`http://localhost:4400/api/notes/${id}`, {
+      const res = await fetch(apiUrl(`/api/notes/${id}`), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -157,7 +158,7 @@ const AddAgenda = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:4400/api/notes/${selectedNote._id}`,
+        apiUrl(`/api/notes/${selectedNote._id}`),
         {
           method: "PATCH",
           headers: {
@@ -284,46 +285,45 @@ const AddAgenda = () => {
             </button>
           </div>
         ) : (
-         <div className="notes-grid">
-  {notes.map((note) => (
-    <div className="tin-note" key={note._id}>
-      <button
-        type="button"
-        className="tin-open"
-        onClick={() => openNoteViewer(note)}
-      >
-        <div className="tin-content">
-        <h3>{note.title}</h3>
-        <p>{note.content}</p>
-        <span className="tin-read-more">Open and read more</span>
-        </div>
-      </button>
-        <div className="tin-actions">
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleComplete(note._id, note.completed);
-            }}
-            className="tin-check"
-          >
-            {note.completed && <Check className="icon-small" />}
-          </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteNote(note._id);
-            }}
-            className="tin-delete"
-          >
-            <Trash2 className="icon-small" />
-          </button>
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
+          <div className="notes-grid">
+            {notes.map((note) => (
+              <div className="tin-note" key={note._id}>
+                <button
+                  type="button"
+                  className="tin-open"
+                  onClick={() => openNoteViewer(note)}
+                >
+                  <div className="tin-content">
+                    <h3>{note.title}</h3>
+                    <p>{note.content}</p>
+                    <span className="tin-read-more">Open and read more</span>
+                  </div>
+                </button>
+                <div className="tin-actions">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleComplete(note._id, note.completed);
+                    }}
+                    className="tin-check"
+                  >
+                    {note.completed && <Check className="icon-small" />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteNote(note._id);
+                    }}
+                    className="tin-delete"
+                  >
+                    <Trash2 className="icon-small" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
 
         )}
       </main>

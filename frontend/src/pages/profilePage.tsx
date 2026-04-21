@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { apiUrl } from "../config/api";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -16,7 +17,7 @@ const ProfilePage = () => {
       }
 
       try {
-        const res = await fetch("http://localhost:4400/api/users/me", {
+        const res = await fetch(apiUrl("/api/users/me"), {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

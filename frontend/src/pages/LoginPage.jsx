@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthPage.css";
+import { apiUrl } from "../config/api";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:4400/api/users/login", {
+      const response = await fetch(apiUrl("/api/users/login"), {
         method: "POST",
         headers: { 
           "Content-Type": "application/json"
@@ -36,7 +37,7 @@ const LoginPage = () => {
       }
     } catch (err) {
       console.error("Login error:", err);
-      alert("Something went wrong. Check backend is running.");
+        alert("Something went wrong while contacting the server. Please try again.");
     }
   };
 
