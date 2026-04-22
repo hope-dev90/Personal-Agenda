@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthPage.css";
 import { apiUrl } from "../config/api";
+import { getErrorMessage, readApiResponse } from "../utils/apiResponse";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
+      const data = await readApiResponse(response);
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
@@ -33,7 +34,7 @@ const LoginPage = () => {
         clearForm();
         navigate("/addagenda");
       } else {
-        alert(data.message || "Login failed");
+        alert(getErrorMessage(response, data, "Login failed"));
       }
     } catch (err) {
       console.error("Login error:", err);

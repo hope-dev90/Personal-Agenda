@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthPage.css";
 import { apiUrl } from "../config/api";
+import { getErrorMessage, readApiResponse } from "../utils/apiResponse";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -30,7 +31,7 @@ const SignupPage = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
-      const data = await res.json();
+      const data = await readApiResponse(res);
 
       if (res.ok) {
         setMessage(
@@ -44,7 +45,7 @@ const SignupPage = () => {
           navigate("/verify-email");
         }, 2000);
       } else {
-        setError(data.message || "Signup failed");
+        setError(getErrorMessage(res, data, "Signup failed"));
       }
     } catch (err) {
       console.error("Signup error:", err);
