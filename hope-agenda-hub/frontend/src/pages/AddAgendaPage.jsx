@@ -3,6 +3,7 @@ import { Plus, Trash2, Check, Calendar, X, Pencil } from "lucide-react";
 import Footer from "../components/Footer";
 import "./AddAgendaPage.css";
 import Navbar from "../components/Navbar";
+import { apiUrl } from "../config/api";
 
 const AddAgenda = () => {
   const token = localStorage.getItem("token");
@@ -21,7 +22,7 @@ const AddAgenda = () => {
     const fetchNotes = async () => {
       if (!token) return;
       try {
-        const res = await fetch("http://localhost:4400/api/notes", {
+        const res = await fetch(apiUrl("/api/notes"), {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch notes");
@@ -56,7 +57,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:4400/api/notes", {
+      const res = await fetch(apiUrl("/api/notes"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +93,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      const res = await fetch(`http://localhost:4400/api/notes/${id}`, {
+      const res = await fetch(apiUrl(`/api/notes/${id}`), {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -114,7 +115,7 @@ const AddAgenda = () => {
     if (!token) return;
 
     try {
-      const res = await fetch(`http://localhost:4400/api/notes/${id}`, {
+      const res = await fetch(apiUrl(`/api/notes/${id}`), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -158,7 +159,7 @@ const AddAgenda = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:4400/api/notes/${selectedNote._id}`,
+        apiUrl(`/api/notes/${selectedNote._id}`),
         {
           method: "PATCH",
           headers: {

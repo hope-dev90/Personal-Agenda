@@ -1,16 +1,13 @@
 import "dotenv/config"; // dotenv
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 import debugLib from "debug";
-import config from "config";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger.js";
 import connectDB from "./config/database.js";
 import userRoutes from "./routes/userRoutes.js";
 import noteRoutes from "./routes/noteRoutes.js";
-import { loginUser, registerUser } from "./controllers/userController.js";
 
 const debug = debugLib("app:server");
 

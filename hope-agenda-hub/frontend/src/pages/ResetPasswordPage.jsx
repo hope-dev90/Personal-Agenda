@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./AuthPage.css"; // use your existing CSS
+import { apiUrl } from "../config/api";
 
 const ResetPasswordPage = () => {
   const location = useLocation();
@@ -21,7 +22,7 @@ const ResetPasswordPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4400/api/users/reset-password", {
+      const res = await fetch(apiUrl("/api/users/reset-password"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code, newPassword }),
@@ -36,7 +37,7 @@ const ResetPasswordPage = () => {
       }
     } catch (err) {
       console.error(err);
-      alert("Server error");
+      alert("Something went wrong while contacting the server.");
     }
   };
 
@@ -73,6 +74,7 @@ const ResetPasswordPage = () => {
               placeholder="Enter new password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
+              autoComplete="new-password"
               required
             />
           </label>

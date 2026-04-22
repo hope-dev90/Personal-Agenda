@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthPage.css";
+import { apiUrl } from "../config/api";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -23,7 +24,7 @@ const SignupPage = () => {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:4400/api/users/signup", {
+      const res = await fetch(apiUrl("/api/users/signup"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -47,7 +48,7 @@ const SignupPage = () => {
       }
     } catch (err) {
       console.error("Signup error:", err);
-      setError("Something went wrong. Make sure backend is running.");
+      setError("Something went wrong while contacting the server.");
     }
   };
 
@@ -75,6 +76,7 @@ const SignupPage = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
+              autoComplete="name"
               required
             />
           </label>
@@ -86,6 +88,7 @@ const SignupPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
+              autoComplete="email"
               required
             />
           </label>
@@ -97,6 +100,7 @@ const SignupPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
+              autoComplete="new-password"
               required
               minLength="6"
             />

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./AuthPage.css";
+import { apiUrl } from "../config/api";
 
 const EmailVerificationPage = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const EmailVerificationPage = () => {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:4400/api/users/verify-email", {
+      const res = await fetch(apiUrl("/api/users/verify-email"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code }),
@@ -34,7 +35,7 @@ const EmailVerificationPage = () => {
       }
     } catch (err) {
       console.error("Verification error:", err);
-      setError("Something went wrong. Make sure backend is running.");
+      setError("Something went wrong while contacting the server.");
     }
   };
 
@@ -48,6 +49,7 @@ const EmailVerificationPage = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
             required
           />
           <input

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AuthPage.css";
+import { apiUrl } from "../config/api";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ const ForgotPasswordPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4400/api/users/forgot-password", {
+      const res = await fetch(apiUrl("/api/users/forgot-password"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -24,7 +25,7 @@ const ForgotPasswordPage = () => {
       }
     } catch (err) {
       console.error(err);
-      alert("Server error");
+      alert("Something went wrong while contacting the server.");
     }
   };
 
@@ -38,6 +39,7 @@ const ForgotPasswordPage = () => {
             placeholder="Enter your registered email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
             required
           />
           <button type="submit">Send Reset Code</button>
