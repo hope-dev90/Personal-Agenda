@@ -53,6 +53,14 @@ async function sendWithSmtp(toEmail, subject, html) {
   });
 }
 
+function hasSmtpConfig() {
+  return Boolean(process.env.EMAIL_USER?.trim() && process.env.EMAIL_PASS?.trim());
+}
+
+function hasResendConfig() {
+  return Boolean(process.env.RESEND_API_KEY?.trim());
+}
+
 async function sendWithResend(toEmail, subject, html) {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   const from = process.env.RESEND_FROM?.trim() || "onboarding@resend.dev";
@@ -86,13 +94,38 @@ async function sendVerificationEmail(toEmail, code) {
   const subject = "Your Verification Code";
   const html = getVerificationHtml(code);
   const provider = (process.env.EMAIL_PROVIDER || "smtp").toLowerCase();
+  const attempts =
+    provider === "resend"
+      ? [
+          { name: "resend", enabled: hasResendConfig(), send: () => sendWithResend(toEmail, subject, html) },
+          { name: "smtp", enabled: hasSmtpConfig(), send: () => sendWithSmtp(toEmail, subject, html) },
+        ]
+      : [
+          { name: "smtp", enabled: hasSmtpConfig(), send: () => sendWithSmtp(toEmail, subject, html) },
+          { name: "resend", enabled: hasResendConfig(), send: () => sendWithResend(toEmail, subject, html) },
+        ];
 
-  if (provider === "resend") {
-    await sendWithResend(toEmail, subject, html);
-    return;
+  const configuredAttempts = attempts.filter((attempt) => attempt.enabled);
+
+  if (configuredAttempts.length === 0) {
+    throw new Error(
+      "No email provider is configured. Set either RESEND_API_KEY or EMAIL_USER and EMAIL_PASS."
+    );
   }
 
-  await sendWithSmtp(toEmail, subject, html);
+  let lastError;
+
+  for (const attempt of configuredAttempts) {
+    try {
+      await attempt.send();
+      return;
+    } catch (error) {
+      lastError = error;
+      console.error(`Email send failed with ${attempt.name}:`, error.message);
+    }
+  }
+
+  throw lastError;
 }
 
 // JWT token generator
